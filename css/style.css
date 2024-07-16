@@ -615,11 +615,13 @@ body {
   display: inline-block;
   float: left;
   margin-right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 5px;
-  background-size: 40px 40px;
+  background-size: 48px 48px;
   background-repeat: no-repeat;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
 }
 #header #nav {
   color: #2bbc8a;
@@ -661,11 +663,15 @@ body {
 #header #nav ul li:last-child a {
   margin-right: 0;
 }
+#header:hover #logo {
+  filter: none;
+  -webkit-filter: none;
+}
 @media screen and (max-width: 480px) {
   #header #title {
     display: table;
     margin-right: 5rem;
-    min-height: 40px;
+    min-height: 48px;
   }
   #header #title h1 {
     display: table-cell;
@@ -695,7 +701,7 @@ body {
   }
   #header #nav li:not(:first-child) {
     padding-top: 1rem;
-    padding-left: 60px;
+    padding-left: 68px;
     font-size: 1rem;
   }
 }
