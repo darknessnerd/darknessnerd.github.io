@@ -7,10 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta property="og:type" content="website">
-<meta property="og:title" content="FTT">
-<meta property="og:url" content="https://darknessnerd.github.io.git/tags/Linux-Automation/index.html">
+<meta property="og:title" content="search">
+<meta property="og:url" content="https://darknessnerd.github.io.git/search/index.html">
 <meta property="og:site_name" content="FTT">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-16T22:09:38.000Z">
+<meta property="article:modified_time" content="2024-07-16T22:10:04.190Z">
 <meta property="article:author" content="Brunino Criniti">
 <meta name="twitter:card" content="summary">
     
@@ -32,7 +34,7 @@
       
     
     <!-- title -->
-    <title>Tag: Linux Automation</title>
+    <title>search</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -101,42 +103,22 @@
 </header>
 
         
-        <div id="archive">
-  <ul class="post-list">
-    
-    
-    
-    
-      
-      
-      
-      
-        <li class="post-year"><h2>2024</h2></li>
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2024-07-16T22:02:13.000Z" class="dt-published" itemprop="datePublished">2024-07-17</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2024/07/17/Serial-Thrillers-Bash-Script-for-USB-Identification/">Serial Thrillers: Bash Script for USB Identification</a>
-    
-
-
-</span>
-      </li>
-    
-  </ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   
 
-</div>
+  <div class="content" itemprop="articleBody">
+      
+        <section id="search">
+  <form>
+    <input type="text" class="search-input" id="search-input" placeholder="Search...">
+  </form>
+  <div id="search-result"></div>
+  <p class="search-no-result">No results found.</p>
+</section>
+
+      
+  </div>
+</article>
 
         
         <footer id="footer">
@@ -192,6 +174,45 @@
 
 <!-- search -->
 
+  
+<script src="/js/search.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+
+    var $inputArea = $("input#search-input");
+    var $resultArea = document.querySelector("div#search-result");
+
+    $inputArea.focus(function() {
+      var search_path = "search.xml";
+      if (search_path.length == 0) {
+        search_path = "search.xml";
+      }
+      var path = "/" + search_path;
+      searchFunc(path, 'search-input', 'search-result');
+    });
+
+    $inputArea.keydown(function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+      }
+    });
+
+    var observer = new MutationObserver(function(mutationsList, observer) {
+      if (mutationsList.length == 1) {
+        if (mutationsList[0].addedNodes.length) {
+          $(".search-no-result").hide();
+        } else if (mutationsList[0].removedNodes.length) {
+          $(".search-no-result").show(200);
+        }
+      }
+    });
+
+    observer.observe($resultArea, { childList: true });
+
+  });
+  </script>
+
 <!-- Baidu Analytics -->
 
 <!-- Cloudflare Analytics -->
@@ -199,6 +220,26 @@
 <!-- Disqus Comments -->
 
 <!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'darknessnerd/darknessnerd.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = '';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
 
 </body>
 </html>
