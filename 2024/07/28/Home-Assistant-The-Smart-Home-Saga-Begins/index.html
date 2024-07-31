@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Home-Assistant-The-Smart-Home-Saga-Begins📝 Requirement List: 🍓 Raspberry Pi (used 3B+ version for this tutorial) 💿 Raspbian OS  ✨ Bonus Magic Tutorial ✨ 🔮 If you want to know how to install Raspbi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Home Assistant: The Smart Home Saga Begins!">
+<meta property="og:url" content="https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/index.html">
+<meta property="og:site_name" content="FTT">
+<meta property="og:description" content="Home-Assistant-The-Smart-Home-Saga-Begins📝 Requirement List: 🍓 Raspberry Pi (used 3B+ version for this tutorial) 💿 Raspbian OS  ✨ Bonus Magic Tutorial ✨ 🔮 If you want to know how to install Raspbi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/hass-ui.png">
+<meta property="og:image" content="https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/hass-ui-config.png">
+<meta property="og:image" content="https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/speedtest.png">
+<meta property="og:image" content="https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/sensors-example.png">
+<meta property="og:image" content="https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/dashboard.png">
+<meta property="article:published_time" content="2024-07-28T07:07:21.000Z">
+<meta property="article:modified_time" content="2024-07-31T06:51:07.399Z">
+<meta property="article:author" content="Brunino Criniti">
+<meta property="article:tag" content="Raspbian">
+<meta property="article:tag" content="DIY">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="HomeAutomation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/hass-ui.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Home Assistant: The Smart Home Saga Begins!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKT8LDJF9K"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PKT8LDJF9K');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/darknessnerd">Projects</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/07/25/The-Invisible-Setup-Installing-Raspbian-on-Raspberry-Pi-Without-a-Monitor/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&text=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&is_video=false&description=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Home Assistant: The Smart Home Saga Begins!&body=Check out this article: https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&name=Home Assistant: The Smart Home Saga Begins!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&t=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Home-Assistant-The-Smart-Home-Saga-Begins"><span class="toc-number">1.</span> <span class="toc-text">Home-Assistant-The-Smart-Home-Saga-Begins</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9D-Requirement-List"><span class="toc-number">1.1.</span> <span class="toc-text">📝 Requirement List:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-The-Magical-Installation-%F0%9F%A7%99%E2%80%8D%E2%99%82%EF%B8%8F"><span class="toc-number">2.</span> <span class="toc-text">Part 1: The Magical Installation 🧙‍♂️</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Summon-Docker-on-Raspberry-Pi-%F0%9F%90%B3"><span class="toc-number">2.1.</span> <span class="toc-text">Step 1: Summon Docker on Raspberry Pi 🐳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Docker-Compose-The-Fellowship-Leader-%F0%9F%A7%99%E2%80%8D%E2%99%82%EF%B8%8F"><span class="toc-number">2.2.</span> <span class="toc-text">Step 2: Docker Compose - The Fellowship Leader 🧙‍♂️</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuration-Explained-%F0%9F%A7%A9"><span class="toc-number">2.3.</span> <span class="toc-text">Configuration Explained 🧩</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Database-Configuration-%F0%9F%93%9A"><span class="toc-number">2.3.1.</span> <span class="toc-text">Database Configuration 📚</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What%E2%80%99s-Happening-Here"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">What’s Happening Here?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secrets-Configuration-%F0%9F%95%B5%EF%B8%8F%E2%80%8D%E2%99%82%EF%B8%8F"><span class="toc-number">2.3.2.</span> <span class="toc-text">Secrets Configuration 🕵️‍♂️</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enable-Integrations-from-the-Home-Assistant-UI"><span class="toc-number">2.4.</span> <span class="toc-text">Enable Integrations from the Home Assistant UI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coming-Up-Next"><span class="toc-number">2.5.</span> <span class="toc-text">Coming Up Next</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Home Assistant: The Smart Home Saga Begins!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Brunino Criniti</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-07-28T07:07:21.000Z" class="dt-published" itemprop="datePublished">2024-07-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/DIY/" rel="tag">DIY</a>, <a class="p-category" href="/tags/Docker/" rel="tag">Docker</a>, <a class="p-category" href="/tags/HomeAutomation/" rel="tag">HomeAutomation</a>, <a class="p-category" href="/tags/Raspbian/" rel="tag">Raspbian</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Home-Assistant-The-Smart-Home-Saga-Begins"><a href="#Home-Assistant-The-Smart-Home-Saga-Begins" class="headerlink" title="Home-Assistant-The-Smart-Home-Saga-Begins"></a>Home-Assistant-The-Smart-Home-Saga-Begins</h1><h2 id="📝-Requirement-List"><a href="#📝-Requirement-List" class="headerlink" title="📝 Requirement List:"></a>📝 Requirement List:</h2><ol>
+<li>🍓 <strong>Raspberry Pi</strong> (used 3B+ version for this tutorial)</li>
+<li>💿 <strong>Raspbian OS</strong></li>
+</ol>
+<p>✨ <strong>Bonus Magic Tutorial</strong> ✨</p>
+<p>🔮 If you want to know how to install Raspbian on Pi without a monitor, please follow this<a target="_blank" rel="noopener" href="https://darknessnerd.github.io/2024/07/25/The-Invisible-Setup-Installing-Raspbian-on-Raspberry-Pi-Without-a-Monitor/"> <strong>magic tutorial – The Invisible Setup: Installing Raspbian on Raspberry Pi Without a Monitor</strong></a>! 🧙‍♂️</p>
+<p>Enjoy your Pi adventure! 🥧</p>
+<h1 id="Part-1-The-Magical-Installation-🧙‍♂️"><a href="#Part-1-The-Magical-Installation-🧙‍♂️" class="headerlink" title="Part 1: The Magical Installation 🧙‍♂️"></a>Part 1: The Magical Installation 🧙‍♂️</h1><p>Welcome to the world of smart homes! Ready to turn your home into a futuristic paradise? Let’s kick things off with Home Assistant and Postgres. </p>
+<p>But first, a quick disclaimer: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If you start talking to your appliances, we’re not responsible <span class="keyword">for</span> any strange looks from your family members.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Step-1-Summon-Docker-on-Raspberry-Pi-🐳"><a href="#Step-1-Summon-Docker-on-Raspberry-Pi-🐳" class="headerlink" title="Step 1: Summon Docker on Raspberry Pi 🐳"></a>Step 1: Summon Docker on Raspberry Pi 🐳</h2><p>Imagine Docker as the magical suitcase from Mary Poppins. </p>
+<p>It can fit everything you need in one place! </p>
+<p>Here’s how to get Docker onto your Raspberry Pi:</p>
+<ol>
+<li>Open your terminal.</li>
+<li>Run these magical incantations: <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line"><span class="built_in">sudo</span> sh get-docker.sh</span><br><span class="line"><span class="built_in">sudo</span> usermod -aG docker muadib</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Once Docker is installed, grab your Raspberry Pi and do a little celebratory dance. </p>
+<p>You’ve just completed the first step!</p>
+<h2 id="Step-2-Docker-Compose-The-Fellowship-Leader-🧙‍♂️"><a href="#Step-2-Docker-Compose-The-Fellowship-Leader-🧙‍♂️" class="headerlink" title="Step 2: Docker Compose - The Fellowship Leader 🧙‍♂️"></a>Step 2: Docker Compose - The Fellowship Leader 🧙‍♂️</h2><p>Docker Compose is like the director of an orchestra, making sure all your containers play in harmony. </p>
+<p>Create a file named <code>docker-compose.yml</code> and add the following lines to it:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">homeassistant:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">homeassistant</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&quot;ghcr.io/home-assistant/home-assistant:stable&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/muadib/home/hass:/config</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mosquitto</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:16.3-alpine3.20</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">5432</span><span class="string">:5432</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/muadib/home/postgres:/var/lib/postgresql/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_DB=&lt;db_name&gt;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_USER=&lt;user&gt;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_PASSWORD=&lt;password&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Save it, then run this in your terminal:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
+
+<p>Now, take a break. Grab a coffee, pet your cat, or just stare lovingly at your Raspberry Pi as it works its magic.</p>
+<h2 id="Configuration-Explained-🧩"><a href="#Configuration-Explained-🧩" class="headerlink" title="Configuration Explained 🧩"></a>Configuration Explained 🧩</h2><p>Now that you’ve got Home Assistant and Postgres running, it’s time to configure them.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
+
+<p>This is where the real fun begins. Here’s a breakdown:</p>
+<h3 id="Database-Configuration-📚"><a href="#Database-Configuration-📚" class="headerlink" title="Database Configuration 📚"></a>Database Configuration 📚</h3><p>In your <code>configuration.yaml</code> file, add:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">recorder:</span></span><br><span class="line">  <span class="attr">auto_repack:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">purge_keep_days:</span> <span class="number">7</span></span><br><span class="line">  <span class="attr">db_url:</span> <span class="type">!secret</span> <span class="string">psql_string</span></span><br><span class="line">  <span class="attr">db_retry_wait:</span> <span class="number">15</span> <span class="comment"># Wait 15 seconds before retrying</span></span><br><span class="line">  <span class="attr">include:</span></span><br><span class="line">    <span class="attr">domains:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">person</span></span><br><span class="line">    <span class="attr">entity_globs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">sensor.speedtest*</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">sensor.ram_use_pct*</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">sensor.cpu_load*</span></span><br><span class="line"><span class="attr">history:</span></span><br><span class="line"><span class="attr">logbook:</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="What’s-Happening-Here"><a href="#What’s-Happening-Here" class="headerlink" title="What’s Happening Here?"></a>What’s Happening Here?</h4><ul>
+<li><strong>auto_repack:</strong> Optimizes the database automatically.</li>
+<li><strong>purge_keep_days:</strong> Keeps only the last 7 days of data. Because who needs to remember what their thermostat was set to three months ago?</li>
+<li><strong>db_url:</strong> This is where the magic happens. The connection string for your Postgres database (we’ll configure this in a bit).</li>
+</ul>
+<h3 id="Secrets-Configuration-🕵️‍♂️"><a href="#Secrets-Configuration-🕵️‍♂️" class="headerlink" title="Secrets Configuration 🕵️‍♂️"></a>Secrets Configuration 🕵️‍♂️</h3><p>To keep your secrets safe (because, let’s face it, we all have them), create a <code>secrets.yaml</code> file and add:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">psql_string:</span> <span class="string">&quot;postgresql://&lt;user&gt;:&lt;password&gt;@192.168.0.XXX/&lt;db_name&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Replace <code>PASSWORD</code> and <code>192.168.0.XXX</code> with your actual password and IP address.</p>
+<h2 id="Enable-Integrations-from-the-Home-Assistant-UI"><a href="#Enable-Integrations-from-the-Home-Assistant-UI" class="headerlink" title="Enable Integrations from the Home Assistant UI"></a>Enable Integrations from the Home Assistant UI</h2><p>Run:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>Now, let’s make Home Assistant actually do something!</p>
+<p><img src="/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/hass-ui.png" alt="homeassistant home" title="Hass Home"></p>
+<p>Confgure it and enjoy your journey!!</p>
+<p><img src="/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/hass-ui-config.png" alt="homeassistant home" title="Hass Home"></p>
+<p>Enable some first sensors like:</p>
+<ol>
+<li><strong>Speedtest Integration:</strong> Navigate to the integrations page and enable the Speedtest integration. No more guessing if your internet is slow because of the weather or because your neighbor is downloading every season of their favorite show.</li>
+</ol>
+<p><img src="/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/speedtest.png" alt="homeassistant home" title="Hass Home"></p>
+<ol start="2">
+<li><strong>System Monitoring:</strong> Enable system monitoring metrics by going to <code>config/integrations/integration/systemmonitor</code>. Pick the metrics you care about and add them to your dashboard.</li>
+</ol>
+<p><img src="/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/sensors-example.png" alt="homeassistant home" title="Hass Home"></p>
+<p>Here’s a sneak peek at what your first dashboard might look like:</p>
+<p><img src="/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/dashboard.png" alt="Dashboard System monitor" title="System monitor"></p>
+<p>If you’re interested in learning how to create the dashboard or theme, please leave a comment on this blog.</p>
+<h2 id="Coming-Up-Next"><a href="#Coming-Up-Next" class="headerlink" title="Coming Up Next"></a>Coming Up Next</h2><p>In the next tutorial, we’ll dive into capturing data from RTL weather stations and sensors for humidity and temperature. We’ll also explore frequencies like 400 MHz and 800 MHz. </p>
+<p>So stay tuned, because your smart home journey is just beginning!</p>
+<p>Until next time, happy automating! 🚀</p>
+<hr>
+<p>Feel free to share your progress and any questions in the comments below. </p>
+<p>Let’s make our homes smarter together!</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/darknessnerd">Projects</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Home-Assistant-The-Smart-Home-Saga-Begins"><span class="toc-number">1.</span> <span class="toc-text">Home-Assistant-The-Smart-Home-Saga-Begins</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9D-Requirement-List"><span class="toc-number">1.1.</span> <span class="toc-text">📝 Requirement List:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-The-Magical-Installation-%F0%9F%A7%99%E2%80%8D%E2%99%82%EF%B8%8F"><span class="toc-number">2.</span> <span class="toc-text">Part 1: The Magical Installation 🧙‍♂️</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Summon-Docker-on-Raspberry-Pi-%F0%9F%90%B3"><span class="toc-number">2.1.</span> <span class="toc-text">Step 1: Summon Docker on Raspberry Pi 🐳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Docker-Compose-The-Fellowship-Leader-%F0%9F%A7%99%E2%80%8D%E2%99%82%EF%B8%8F"><span class="toc-number">2.2.</span> <span class="toc-text">Step 2: Docker Compose - The Fellowship Leader 🧙‍♂️</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuration-Explained-%F0%9F%A7%A9"><span class="toc-number">2.3.</span> <span class="toc-text">Configuration Explained 🧩</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Database-Configuration-%F0%9F%93%9A"><span class="toc-number">2.3.1.</span> <span class="toc-text">Database Configuration 📚</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What%E2%80%99s-Happening-Here"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">What’s Happening Here?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secrets-Configuration-%F0%9F%95%B5%EF%B8%8F%E2%80%8D%E2%99%82%EF%B8%8F"><span class="toc-number">2.3.2.</span> <span class="toc-text">Secrets Configuration 🕵️‍♂️</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enable-Integrations-from-the-Home-Assistant-UI"><span class="toc-number">2.4.</span> <span class="toc-text">Enable Integrations from the Home Assistant UI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coming-Up-Next"><span class="toc-number">2.5.</span> <span class="toc-text">Coming Up Next</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&text=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&is_video=false&description=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Home Assistant: The Smart Home Saga Begins!&body=Check out this article: https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&title=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&name=Home Assistant: The Smart Home Saga Begins!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://darknessnerd.github.io.git/2024/07/28/Home-Assistant-The-Smart-Home-Saga-Begins/&t=Home Assistant: The Smart Home Saga Begins!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Brunino Criniti
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/darknessnerd">Projects</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'darknessnerd/darknessnerd.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = '';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
